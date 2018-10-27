@@ -44,43 +44,24 @@ def send_notification(title,img):
 
 def screenshot():
     # cmd = "firefox -screenshot https://www.etoro.com/people/aimstrader/portfolio "
-    # os.system(cmd)
-
-        # adresa = ' https://www.etoro.com/people/aimstrader/portfolio '
-        adresa = 'https://www.etoro.com/people/asketak/portfolio '
-        options = webdriver.ChromeOptions()
-
-        # options.add_argument('headless')
-        options.add_argument('window-size=1200x600')
-        options.add_argument("user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.67 Safari/537.36")
-
-        driver = webdriver.Chrome('./chromedriver', chrome_options=options)
-        profile = webdriver.FirefoxProfile()
-        driver = webdriver.Firefox(profile)
-        driver.get(adresa)
-
-        driver.implicitly_wait(30)
-        driver.find_element_by_class_name('empty-state-title')
-
-        driver.get_screenshot_as_file('screenshot.png')
-        driver.quit()
-        # <div class="empty-state-title ng-binding">Portfolio is empty</div>
+    os.system("import -window root screenshot.png")
 
     
 
 
 def are_images_same(img1,img2):
-    img = Image(filename=img1)
-    im = Image(filename=img2)
+    # img = Image(filename=img1)
+    # im = Image(filename=img2)
+    return os.path.getsize(img1) == es.path.getsize(img2)
 
-    img.crop(250, 200, width=400, height=800)
-    im.crop(250, 200, width=400, height=800)
+    # img.crop(250, 200, width=400, height=800)
+    # im.crop(250, 200, width=400, height=800)
     # display(img, server_name=':0')
 
-    comparison = img.compare(im, metric='root_mean_square')[1]
-    if comparison == 0:
-        return True
-    return False
+    # comparison = img.compare(im, metric='root_mean_square')[1]
+    # if comparison == 0:
+        # return True
+    # return False
 
 if __name__ == "__main__":
     # display = Display(visible=0, size=(1800, 1600))
