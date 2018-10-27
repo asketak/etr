@@ -1,0 +1,12 @@
+1540569295319	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.RW6A6DnxVzhI"
+
+(firefox:7316): Gtk-WARNING **: 17:54:55.834: Theme parsing error: <data>:1:34: Expected ')' in color definition
+
+(firefox:7316): Gtk-WARNING **: 17:54:55.834: Theme parsing error: <data>:1:77: Expected ')' in color definition
+1540569296857	Marionette	INFO	Listening on port 46197
+1540569296932	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: https://www.etoro.com/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=391342295, line 1: unreachable code after return statement
+JavaScript warning: https://www.etoro.com/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=391342295, line 1: unreachable code after return statement
+JavaScript warning: https://www.etoro.com/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=391342295 line 1 > eval, line 1: unreachable code after return statement
+1540569301326	Marionette	INFO	Stopped listening on port 46197
+[Parent 7316, Gecko_IOThread] WARNING: pipe error (98): Connection reset by peer: file /build/firefox-4VfQCB/firefox-63.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 356
