@@ -12,13 +12,6 @@ from ctypes import c_void_p, c_size_t
 import base64
 from io import BytesIO
 
-from selenium import webdriver
-
-from pyvirtualdisplay import Display
-from selenium import webdriver
-from contextlib import contextmanager
-from selenium.webdriver.support.ui import WebDriverWait 
-from selenium.webdriver.support.expected_conditions import staleness_of
 
 def send_notification(title,img):
     url = 'https://www.pushsafer.com/api'
