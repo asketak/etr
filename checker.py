@@ -1,4 +1,5 @@
 from wand.image import Image
+import time, traceback
 from wand.display import display
 import time
 import os
@@ -54,28 +55,40 @@ def are_images_same(img1,img2):
         return True
     return False
 
-if __name__ == "__main__":
-    # display = Display(visible=0, size=(1800, 1600))
-    # display.start()
+
+def every(delay, task):
+  next_time = time.time() + delay
+  while True:
+    time.sleep(max(0, next_time - time.time()))
+    try:
+      task()
+    except Exception:
+      traceback.print_exc()
+      # in production code you might want to have this instead of course:
+      # logger.exception("Problem while executing repetitive task.")
+    # skip tasks if we are behind schedule:
+    next_time += (time.time() - next_time) // delay * delay + delay
+
+def foo():
     sendimg =  base64.b64encode(open("screenshot.png", "rb").read()).decode('UTF-8')
     sendimg = "data:image/png;base64," + sendimg
-    while True:
+    try:
+        os.system("cp screenshot.png before_screenshot.png")
+        print("loop")
         try:
-            time.sleep(20)
-            os.system("cp screenshot.png before_screenshot.png")
-            print("loop")
-            try:
-                screenshot()
-            except Exception as e:
-                print(e)
-                send_notification("ETORO-screenshot",sendimg) # TODO musi byt alert i pri navraceni,
-                continue
-            if not are_images_same("before_screenshot.png", "screenshot.png"):
-                sendimg =  base64.b64encode(open("screenshot.png", "rb").read()).decode('UTF-8')
-                sendimg = "data:image/png;base64," + sendimg
-                send_notification("ETORO-ZMENA",sendimg) # TODO musi byt alert i pri navraceni,
-
-
+            screenshot()
         except Exception as e:
-            send_notification("ETORO - crash",sendimg) # TODO musi byt alert i pri navraceni,
             print(e)
+            send_notification("ETORO-screenshot",sendimg) # TODO musi byt alert i pri navraceni,
+            continue
+        if not are_images_same("before_screenshot.png", "screenshot.png"):
+            sendimg =  base64.b64encode(open("screenshot.png", "rb").read()).decode('UTF-8')
+            sendimg = "data:image/png;base64," + sendimg
+            send_notification("ETORO-ZMENA",sendimg) # TODO musi byt alert i pri navraceni,
+    except Exception as e:
+        send_notification("ETORO - crash",sendimg) # TODO musi byt alert i pri navraceni,
+        print(e)
+
+
+if __name__ == "__main__":
+    every(60, foo)
